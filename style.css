@@ -1,0 +1,152 @@
+:root {
+  color-scheme: dark;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #151310;
+  color: #f7efe1;
+}
+
+* { box-sizing: border-box; }
+
+html, body { min-height: 100%; margin: 0; }
+
+body { overflow-x: hidden; }
+
+.stage {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.poster-fit { position: relative; flex-shrink: 0; }
+
+.poster {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 848px;
+  height: 1200px;
+  background: #625246;
+  transform-origin: top left;
+  cursor: crosshair;
+  user-select: none;
+  --cursor-x: 424px;
+  --cursor-y: 670px;
+  --lens-radius: 190px;
+  --lens-opacity: 0;
+}
+
+/* Sustituye esta URL por url("assets/familia.jpg") cuando guardes tu foto local. */
+.photo {
+  position: absolute;
+  inset: -22px;
+  background-image: url("https://images.pexels.com/photos/11368637/pexels-photo-11368637.jpeg?auto=compress&cs=tinysrgb&w=1600");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.photo--blur {
+  filter: blur(21px) saturate(.66) sepia(.18) brightness(.77);
+}
+
+.photo--clear {
+  filter: saturate(.92) sepia(.08) brightness(.93);
+  opacity: var(--lens-opacity);
+  -webkit-mask-image: radial-gradient(
+    circle var(--lens-radius) at var(--cursor-x) var(--cursor-y),
+    #000 0%,
+    #000 42%,
+    rgba(0,0,0,.85) 63%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle var(--lens-radius) at var(--cursor-x) var(--cursor-y),
+    #000 0%,
+    #000 42%,
+    rgba(0,0,0,.85) 63%,
+    transparent 100%
+  );
+  transition: opacity 450ms ease;
+  will-change: opacity, mask-image;
+}
+
+/* Un tinte sutil mantiene legible el texto sin bloquear la zona de enfoque. */
+.poster-tint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(18,14,12,.84) 0%, rgba(25,20,17,.50) 26%, transparent 46%),
+    linear-gradient(to top, rgba(18,14,12,.79) 0%, transparent 28%);
+}
+
+.poster-grain {
+  position: absolute;
+  inset: 0;
+  opacity: .14;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+}
+
+.poster-header, .poster-footer { position: absolute; z-index: 2; left: 60px; right: 60px; }
+
+.poster-header { top: 64px; }
+
+.overline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255,241,220,.66);
+  padding-top: 18px;
+  font-size: 16px;
+  letter-spacing: .27em;
+  font-weight: 500;
+}
+
+h1 {
+  margin: 58px 0 24px;
+  max-width: 730px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 73px;
+  line-height: 1.02;
+  font-weight: 400;
+  letter-spacing: -.044em;
+  text-wrap: balance;
+}
+
+h1 em { font-weight: 400; }
+
+.provisional-text {
+  margin: 0;
+  width: 530px;
+  max-width: 100%;
+  font-size: 21px;
+  line-height: 1.52;
+  letter-spacing: .025em;
+  color: rgba(255,246,231,.84);
+}
+
+.poster-footer {
+  bottom: 53px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding-top: 22px;
+}
+
+.footer-divider { position: absolute; top: 0; left: 0; right: 0; height: 1px; background: rgba(255,241,220,.58); }
+
+.interaction-hint, .edition { margin: 0; font-size: 14px; letter-spacing: .19em; }
+
+.interaction-hint { display: inline-flex; align-items: center; gap: 13px; }
+
+.hint-circle { width: 14px; height: 14px; border: 1px solid #f7efe1; border-radius: 50%; box-shadow: 0 0 0 5px rgba(255,255,255,.10); }
+
+.edition { opacity: .72; white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  .photo--clear { transition: none; }
+}

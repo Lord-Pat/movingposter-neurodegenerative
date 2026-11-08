@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#151310" />
+    <title>Recuerdos que se desvanecen · Cartel interactivo</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <main class="stage">
+      <div class="poster-fit" id="posterFit">
+        <article class="poster" id="poster" aria-label="Cartel interactivo sobre el Alzheimer">
+          <!-- Las DOS capas usan exactamente la misma imagen. El blur solo se aplica en CSS. -->
+          <div class="photo photo--blur" aria-hidden="true"></div>
+          <div class="photo photo--clear" aria-hidden="true"></div>
+          <div class="poster-tint" aria-hidden="true"></div>
+          <div class="poster-grain" aria-hidden="true"></div>
+
+          <header class="poster-header">
+            <h1>Enfermedades <em>neurodegenerativas</em></h1>
+            <p class="provisional-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
+          </header>
+
+          <footer class="poster-footer">
+          </footer>
+        </article>
+      </div>
+    </main>
+  </body>
+</html>
